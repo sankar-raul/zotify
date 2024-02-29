@@ -170,6 +170,7 @@ document.querySelector('link[rel="website icon"]').href = pic.src;
 first();
 var count = 0;
 const nextSong = () => {
+    played();
     if (musics.length >= 0) {
     if (musics.length > count+1) { 
         count++;
