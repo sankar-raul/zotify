@@ -158,17 +158,21 @@ const next = document.getElementById("forward");
 const sname = document.getElementById("sname");
 const pbtn = document.getElementById("pbtn");
 const pic = document.getElementById("pic");
-const musics = ["Baby - Justin Bieber","Pasoori","Girls Like You","Lavitating","Mere Liye Tum Kaafi Ho","Bilionera","Kaise Hua","HUSN"];
+const musics = ["Baby - Justin Bieber","Pasoori","Girls Like You","Lavitating","Mere Liye Tum Kaafi Ho","Bilionera","Kaise Hua","HUSN","Teri Baaton Mein Aisa Uljha Jiya"];
+var count = 0
+const random = (current = 0) => {
+    return Math.floor(musics.length * Math.random());
+}
 function first() {
-audio.src = "songs/" + musics[0] + ".mp3";
-pic.src = "pics/" + musics[0] +  ".jpg";
-sname.textContent = musics[0];
-document.title = musics[0] + " | Sankar";
+count = random();
+audio.src = "songs/" + musics[count] + ".mp3";
+pic.src = "pics/" + musics[count] +  ".jpg";
+sname.textContent = musics[count];
+document.title = musics[count] + " | Sankar";
 document.querySelector('link[rel="website icon"]').href = pic.src;
 
 }
-first();
-var count = 0;
+first();;
 const nextSong = () => {
     played();
     if (musics.length >= 0) {
