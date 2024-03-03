@@ -83,12 +83,12 @@ const previousSong = () => {
             }
 
         } else {
-            if (isPlaying) {
-                audio.play();
-            }
             count = musics.length - 1;
             audio.src = "songs/" + musics[count] + ".mp3";
             setBack("pics/" + musics[count] + ".jpg");
+            if (isPlaying) {
+                audio.play();
+            }
             document.title = musics[count] + " | Sankar";
             document.querySelector('link[rel="website icon"]').href = pic.src;
             sname.textContent = musics[count];

@@ -13,11 +13,11 @@
         .music {
             aspect-ratio: 1 / 1.2;
             width: clamp(340px,50vw,400px);
-            background: linear-gradient(#0002 40%,rgba(0,0,0, 0.6));
+            background: linear-gradient(#0002 40%,rgba(0,0,0, 1));
             outline: 50px solid #0000;
             
-            backdrop-filter: blur(58px);
-            box-shadow: 0px 3px 8px 3px #0002;
+            backdrop-filter: blur(25px);
+            box-shadow: 0px 4px 15px 1px #2224;
             margin-right: auto;
             margin-left: auto;
             margin-top: 10vh;
