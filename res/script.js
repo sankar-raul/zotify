@@ -13,13 +13,10 @@ var count = 0
 const random = (current = 0) => {
     return Math.floor(musics.length * Math.random());
 }
-function setBack(img = "pics/HUSN.jpg") {
+function setBack(img = "preload.png") {
     var scope = document.querySelector(".back");
-    let preload = document.querySelector(".dontcare");
-    pic.src = "pics/preload.png";
-    preload.src = img;
     scope.src = img;
-    preload.onload = () => {
+    scope.onload = () => {
         pic.src = img;
         pic.style.animation = "2s ease fade"
     }
