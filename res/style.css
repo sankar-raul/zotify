@@ -42,6 +42,7 @@
             width: 100%;
             aspect-ratio: 1 / 1.2;
             object-fit: cover;
+            background-image: linear-gradient(45deg,lime,cyan);
         }
         .topBars {
             background: rgba(235, 235, 238, 0.012);
