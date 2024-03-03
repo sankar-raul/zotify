@@ -37,7 +37,7 @@ function first() {
     document.querySelector('link[rel="website icon"]').href = pic.src;
 
 }
-first();;
+first();
 const nextSong = () => {
     pre();
     seekSlider.style.background = `linear-gradient(to right, #fff3f3 0%, #fff3 100%)`;
