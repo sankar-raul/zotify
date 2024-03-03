@@ -39,8 +39,8 @@ function first() {
 }
 first();
 const nextSong = () => {
+    seekSlider.style.background = `transparent`;
     pre();
-    seekSlider.style.background = `linear-gradient(to right, #fff3f3 0%, #fff3 100%)`;
     played();
     if (musics.length >= 0) {
         if (musics.length > count+1) {
@@ -69,8 +69,8 @@ const nextSong = () => {
     }
 }
 const previousSong = () => {
+    seekSlider.style.background = `transparent`;
     pre();
-    seekSlider.style.background = `linear-gradient(to right, #fff3f3 0%, #fff3 100%)`;
     played();
     if (musics.length >= 0) {
         if (count != 0) {
