@@ -42,11 +42,19 @@
             width: 100%;
             aspect-ratio: 1 / 1.2;
             object-fit: cover;
-            background-image: linear-gradient(45deg,lime,cyan);
+            background-image: url('pics/preload.png');
         }
         .topBars {
-            background: rgba(235, 235, 238, 0.012);
-            backdrop-filter: blur(12px);
+        }
+        @keyframes fade {
+            0% {
+                opacity: 0.4;
+            } 100% {
+                opacity: 1;
+            }
+        }
+        .dontcare {
+            display: none;
         }
         .song-name {
             font-size: 1rem;
@@ -58,13 +66,15 @@
         }
         .image {
             text-align: center;
-            
+            display: grid;
+            place-items: center;
         }
         .image > img {
             object-fit: cover;
-            padding-top: 5px;
             width: 64%;
+            aspect-ratio: 1 / 1;
             box-shadow: 0px 4px 14px 4px #0004;
+            animation: fade .5s ease;
         } 
         .controls {
             display: grid;
