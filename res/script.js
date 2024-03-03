@@ -24,6 +24,9 @@ function setBack(img = "pics/HUSN.jpg") {
         pic.style.animation = "2s ease fade"
     }
 }
+function pre() {
+    pic.src = "pics/preload.png";
+}
 function first() {
     count = random();
     audio.src = "songs/" + musics[count] + ".mp3";
@@ -36,6 +39,7 @@ function first() {
 }
 first();;
 const nextSong = () => {
+    pre();
     seekSlider.style.background = `linear-gradient(to right, #fff3f3 0%, #fff3 100%)`;
     played();
     if (musics.length >= 0) {
@@ -67,6 +71,7 @@ const nextSong = () => {
     }
 }
 const previousSong = () => {
+    pre();
     seekSlider.style.background = `linear-gradient(to right, #fff3f3 0%, #fff3 100%)`;
     played();
     if (musics.length >= 0) {
