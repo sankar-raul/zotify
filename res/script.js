@@ -46,8 +46,7 @@ const nextSong = () => {
         if (musics.length > count+1) {
             count++;
             audio.src = "songs/" + musics[count] + ".mp3";
-            pic.src = "pics/" + musics[count] + ".jpg";
-            setBack(pic.src);
+            setBack("pics/" + musics[count] + ".jpg");
             document.querySelector('link[rel="website icon"]').href = pic.src;
             document.title = musics[count] + " | Sankar";
             sname.textContent = musics[count];
@@ -57,8 +56,7 @@ const nextSong = () => {
         } else {
             count = 0;
             audio.src = "songs/" + musics[count] + ".mp3";
-            pic.src = "pics/" + musics[count] + ".jpg";
-            setBack(pic.src);
+            setBack("pics/" + musics[count] + ".jpg");
             document.title = musics[count] + " | Sankar";
             document.querySelector('link[rel="website icon"]').href = pic.src;
             sname.textContent = musics[count];
@@ -78,7 +76,6 @@ const previousSong = () => {
         if (count != 0) {
             count--;
             audio.src = "songs/" + musics[count] + ".mp3";
-            pic.src = "pics/preload.png";
             setBack("pics/" + musics[count] + ".jpg");
             document.querySelector('link[rel="website icon"]').href = pic.src;
             document.title = musics[count] + " | Sankar";
@@ -93,8 +90,7 @@ const previousSong = () => {
             }
             count = musics.length - 1;
             audio.src = "songs/" + musics[count] + ".mp3";
-            pic.src = "pics/" + musics[count] + ".jpg";
-            setBack(pic.src);
+            setBack("pics/" + musics[count] + ".jpg");
             document.title = musics[count] + " | Sankar";
             document.querySelector('link[rel="website icon"]').href = pic.src;
             sname.textContent = musics[count];
