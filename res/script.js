@@ -78,8 +78,8 @@ const previousSong = () => {
         if (count != 0) {
             count--;
             audio.src = "songs/" + musics[count] + ".mp3";
-            pic.src = "pics/" + musics[count] + ".jpg";
-            setBack(pic.src);
+            pic.src = "pics/preload.png";
+            setBack("pics/" + musics[count] + ".jpg");
             document.querySelector('link[rel="website icon"]').href = pic.src;
             document.title = musics[count] + " | Sankar";
             sname.textContent = musics[count];
