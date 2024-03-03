@@ -36,6 +36,7 @@ function first() {
 }
 first();
 const nextSong = () => {
+    
     seekSlider.style.background = `transparent`;
     pre();
     played();
