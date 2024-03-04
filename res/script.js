@@ -17,8 +17,12 @@ function setBack(img = "preload.png") {
     var scope = document.querySelector(".back");
     scope.src = img;
     scope.onload = () => {
+        pic.style.display = "none";
         pic.src = img;
-        pic.style.animation = "2s ease fade"
+        setTimeout(function() {
+            pic.style.display = "block"
+        }, 100);
+        
     }
 }
 function pre() {
