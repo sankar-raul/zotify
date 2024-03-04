@@ -10,13 +10,16 @@
             background: rgb(14, 14, 14);
             overflow-x: hidden;
         }
+        #dontcare {
+            display: none;
+        }
         .music {
             aspect-ratio: 1 / 1.2;
             width: clamp(340px,50vw,400px);
             background: linear-gradient(#0002 40%,rgba(0,0,0, 1));
             outline: 50px solid #0000;
             
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
             box-shadow: 0px 4px 15px 1px #2224;
             margin-right: auto;
             margin-left: auto;
@@ -32,11 +35,11 @@
             text-align: center;
             display: grid;
             place-items: center;
-            top: calc(10vh + 35px);
+            top: calc(10vh + 32px);
             margin-left: 50%;
             transform: translate(-50%);
-            z-index: -6;
-            width: calc(var(--w) - 70px);
+            z-index: -2;
+            width: calc(var(--w) - 64px);
         }
         .backEffect .back {
             width: 100%;

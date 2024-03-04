@@ -13,12 +13,15 @@ var count = 0
 const random = (current = 0) => {
     return Math.floor(musics.length * Math.random());
 }
+let pree = document.getElementById("dontcare");
+var scope = document.querySelector(".back");
 function setBack(img = "preload.png") {
-    var scope = document.querySelector(".back");
-    scope.src = img;
-    scope.onload = () => {
+    scope.src = "pics/preload.png";
+    pree.src = img;
+    pree.onload = () => {
         pic.style.display = "none";
         pic.src = img;
+        scope.src = img;
         setTimeout(function() {
             pic.style.display = "block"
         }, 100);
