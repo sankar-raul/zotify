@@ -8,7 +8,7 @@ const next = document.getElementById("forward");
 const sname = document.getElementById("sname");
 const pbtn = document.getElementById("pbtn");
 const pic = document.getElementById("pic");
-const musics = ["Baby - Justin Bieber", "Pasoori", "Girls Like You", "Lavitating", "Mere Liye Tum Kaafi Ho", "Bilionera", "Kaise Hua", "HUSN", "Teri Baaton Mein Aisa Uljha Jiya"];
+const musics = ["Baby - Justin Bieber", "Pasoori", "Girls Like You","Barish", "Lavitating", "Mere Liye Tum Kaafi Ho", "Bilionera", "Kaise Hua", "HUSN", "Teri Baaton Mein Aisa Uljha Jiya"];
 var count = 0
 const random = (current = 0) => {
     return Math.floor(musics.length * Math.random());
