@@ -8,6 +8,7 @@ const next = document.getElementById("forward");
 const sname = document.getElementById("sname");
 const pbtn = document.querySelector('.playbtn')
 const pic = document.getElementById("pic");
+const loading = document.getElementsByClassName('loading')[0]
 const musics = ["Mere Samnewali Khidki Mein","Baby - Justin Bieber", "Gulabi Aankhen","Pasoori", "Girls Like You","Barish", "Lavitating", "Mere Liye Tum Kaafi Ho", "Bilionera","Likhe Jo Khat Tujhe", "Kaise Hua", "HUSN", "Teri Baaton Mein Aisa Uljha Jiya"];
 var count = 0
 const random = (current = 0) => {
@@ -36,6 +37,7 @@ function first() {
     audio.src = "songs/" + musics[count] + ".mp3";
     pic.src = "pics/" + musics[count] + ".jpg";
     setBack(pic.src);
+    seekSlider.style.background = `rgba(255, 255, 255, 0.2)`;
     sname.textContent = musics[count];
     document.title = musics[count] + " | Sankar";
     document.querySelector('link[rel="website icon"]').href = pic.src;
@@ -43,11 +45,11 @@ function first() {
     audio.title =  musics[count]
     setMediaSessionMetadata(audio)
 }
-first();
+first()
 const nextSong = () => {
-    seekSlider.style.background = `transparent`;
-    pre();
-    played();
+    pre()
+    played()
+    seekSlider.style.background = `rgba(255, 255, 255, 0.2)`;
     if (musics.length >= 0) {
         if (musics.length > count+1) {
             count++;  
@@ -69,10 +71,16 @@ const nextSong = () => {
     audio.title =  musics[count]
     setMediaSessionMetadata(audio)
 }
+audio.addEventListener('loadstart', () => {
+    load()
+})
+audio.addEventListener('loadeddata', () => {
+    loaded()
+})
 const previousSong = () => {
-    seekSlider.style.background = `transparent`;
-    pre();
-    played();
+    pre()
+    played()
+    seekSlider.style.background = `rgba(255, 255, 255, 0.2)`;
     if (musics.length >= 0) {
         if (count != 0) {
             count--;
@@ -104,16 +112,14 @@ const updateTotalDuration = audi => {
     durationMT.innerHTML = Math.floor(dur / 60);
     durationST.innerHTML = Math.floor(dur % 60);
 }
-audio.onloadedmetadata = function() {
-    seekSlider.max = audio.duration;
-    updateTotalDuration(audio);
-    var playedPercentage = (audio.currentTime / audio.duration) * 100;
-
+audio.onloadedmetadata = () => {
+    seekSlider.max = audio.duration
+    updateTotalDuration(audio)
+    let playedPercentage = (audio.currentTime / audio.duration) * 100
     seekSlider.style.background = `linear-gradient(to right, #fff3f3 ${playedPercentage}%, #fff3 ${playedPercentage}%)`;
-};
+}
 const played = () => {
-    var playedPercentage = (audio.currentTime / audio.duration) * 100;
-
+    var playedPercentage = (audio.currentTime / audio.duration) * 100
     seekSlider.style.background = `linear-gradient(to right, #fff3f3 ${playedPercentage}%, #fff3 ${playedPercentage}%)`;
 }
 const updateD = () => {
@@ -122,16 +128,16 @@ const updateD = () => {
     durationS.innerHTML = Math.floor(dur % 60);
 }
 seekSlider.oninput = function() {
-    updateD();
-    var playedPercentage = (seekSlider.value / audio.duration) * 100;
+    updateD()
+    let playedPercentage = (seekSlider.value / audio.duration) * 100;
 
     seekSlider.style.background = `linear-gradient(to right, #fff3f3 ${playedPercentage}%, #fff3 ${playedPercentage}%)`;
     audio.ontimeupdate = function() {
 
         if (audio.duration <= audio.currentTime) {
-            nextSong();
+            nextSong()
         } else {
-            updateD();
+            updateD()
         }
 
     }
@@ -139,19 +145,32 @@ seekSlider.oninput = function() {
 };
 seekSlider.onchange = () => {
     audio.currentTime = seekSlider.value;
-    setof();
-    played();
+    load()
+    let playedPercentage = (seekSlider.value / audio.duration) * 100;
+    seekSlider.style.background = `linear-gradient(to right, #fff3f3 ${playedPercentage}%, #fff3 ${playedPercentage}%)`;
+    setof()
+    played()
+}
+function loaded() {
+    loading.style.display = 'none'
+    document.querySelector('.ctlBtn > .playbtn').style.color = "#111"
+    document.querySelector('.ctlBtn > .playbtn').style.background = "#fff3f3"
+}
+function load() {
+    loading.style.display = 'block'
+    document.querySelector('.ctlBtn > .playbtn').style.color = "#fff"
+    document.querySelector('.ctlBtn > .playbtn').style.background = "#fff4"
 }
 function setof() {
     audio.ontimeupdate = function() {
+        loaded()
         seekSlider.value = audio.currentTime;
         if (audio.duration <= audio.currentTime) {
-            nextSong();
+            nextSong()
         } else {
-            updateDuration(audio);
+            updateDuration(audio)
         }
-        played();
-
+        played()
     }
 }
 function playM(ok) {

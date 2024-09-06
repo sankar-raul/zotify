@@ -82,7 +82,6 @@
             
 
         }
-        
         .ctlBtn {
             width: 100%;
             display: flex;
@@ -97,6 +96,7 @@
         .ctlBtn:nth-child(1) {
             justify-content: right;
             align-items: center;
+            transition-duration: .1s;
         }
         .ctlBtn:nth-child(2) {
             justify-content: center;
@@ -110,14 +110,12 @@
             position: relative;
             padding: 12px 17px;
             border-radius: 50%;
-            border: 1px solid #fff3f3;
         }
         .fa-play {
             position: relative;
             padding: 12px 13px;
             padding-left: 18px;
             border-radius: 50%;
-            border: 1px solid #fff3f3;
         }
         .ctlBtn:nth-child(3) {
             justify-content: left;
@@ -174,4 +172,29 @@
            flex-direction: rows;
            justify-content: space-between;
         }
-        
+        .loading {
+            position: absolute;
+            border: 3px solid #fff3f3;
+            border-left: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            color: #000;
+            padding: calc(1.7rem - 2px);
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            animation: loading 1s infinite linear;
+            z-index: -1;
+            transition: .2s;
+        }
+        .loading {
+            display: none;
+        }
+        @keyframes loading {
+            from {
+                transform: rotate(0deg);
+            } to {
+                transform: rotate(360deg);
+            }
+        }
+        .ctlBtn:nth-child(2) {
+            position: relative;
+        }
