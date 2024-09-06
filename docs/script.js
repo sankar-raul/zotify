@@ -6,7 +6,7 @@ const durationST = document.getElementById("sTotal");
 const back = document.getElementById("backward");
 const next = document.getElementById("forward");
 const sname = document.getElementById("sname");
-const pbtn = document.getElementById("pbtn");
+const pbtn = document.querySelector('.playbtn')
 const pic = document.getElementById("pic");
 const musics = ["Mere Samnewali Khidki Mein","Baby - Justin Bieber", "Gulabi Aankhen","Pasoori", "Girls Like You","Barish", "Lavitating", "Mere Liye Tum Kaafi Ho", "Bilionera","Likhe Jo Khat Tujhe", "Kaise Hua", "HUSN", "Teri Baaton Mein Aisa Uljha Jiya"];
 var count = 0
@@ -39,39 +39,35 @@ function first() {
     sname.textContent = musics[count];
     document.title = musics[count] + " | Sankar";
     document.querySelector('link[rel="website icon"]').href = pic.src;
-
+    audio.cover = "pics/" + musics[count] + ".jpg"
+    audio.title =  musics[count]
+    setMediaSessionMetadata(audio)
 }
 first();
 const nextSong = () => {
-    
     seekSlider.style.background = `transparent`;
     pre();
     played();
     if (musics.length >= 0) {
         if (musics.length > count+1) {
-            count++;
-            audio.src = "songs/" + musics[count] + ".mp3";
-            setBack("pics/" + musics[count] + ".jpg");
-            document.querySelector('link[rel="website icon"]').href = pic.src;
-            document.title = musics[count] + " | Sankar";
-            sname.textContent = musics[count];
-            if (isPlaying) {
-                audio.play();
-            }
+            count++;  
         } else {
             count = 0;
-            audio.src = "songs/" + musics[count] + ".mp3";
-            setBack("pics/" + musics[count] + ".jpg");
-            document.title = musics[count] + " | Sankar";
-            document.querySelector('link[rel="website icon"]').href = pic.src;
-            sname.textContent = musics[count];
-            if (isPlaying) {
-                audio.play();
-            }
         }
+        audio.src = "songs/" + musics[count] + ".mp3";
+        setBack("pics/" + musics[count] + ".jpg");
+        document.title = musics[count] + " | Sankar";
+        document.querySelector('link[rel="website icon"]').href = pic.src;
+        sname.textContent = musics[count]
+        audio.play()
+        document.querySelector('.ctlBtn > .playbtn').classList.remove("fa-play")
+        document.querySelector('.ctlBtn > .playbtn').classList.add("fa-pause")
     } else {
         alert("Please add some Songs to play!");
     }
+    audio.cover = "pics/" + musics[count] + ".jpg"
+    audio.title =  musics[count]
+    setMediaSessionMetadata(audio)
 }
 const previousSong = () => {
     seekSlider.style.background = `transparent`;
@@ -80,42 +76,36 @@ const previousSong = () => {
     if (musics.length >= 0) {
         if (count != 0) {
             count--;
-            audio.src = "songs/" + musics[count] + ".mp3";
-            setBack("pics/" + musics[count] + ".jpg");
-            document.querySelector('link[rel="website icon"]').href = pic.src;
-            document.title = musics[count] + " | Sankar";
-            sname.textContent = musics[count];
-            if (isPlaying) {
-                audio.play();
-            }
-
         } else {
             count = musics.length - 1;
-            audio.src = "songs/" + musics[count] + ".mp3";
-            setBack("pics/" + musics[count] + ".jpg");
-            if (isPlaying) {
-                audio.play();
-            }
-            document.title = musics[count] + " | Sankar";
-            document.querySelector('link[rel="website icon"]').href = pic.src;
-            sname.textContent = musics[count];
         }
+        audio.src = "songs/" + musics[count] + ".mp3";
+        setBack("pics/" + musics[count] + ".jpg");
+        document.title = musics[count] + " | Sankar";
+        document.querySelector('link[rel="website icon"]').href = pic.src;
+        sname.textContent = musics[count];
+        audio.play()
+        document.querySelector('.ctlBtn > .playbtn').classList.remove("fa-play")
+        document.querySelector('.ctlBtn > .playbtn').classList.add("fa-pause")
     } else {
         alert("Please add some Songs to play!");
     }
+    audio.cover = "pics/" + musics[count] + ".jpg"
+    audio.title =  musics[count]
+    setMediaSessionMetadata(audio)
 }
 const updateDuration = audi => {
-    let dur = audi.currentTime;
+    let dur = audi.currentTime
     durationM.innerHTML = Math.floor(dur / 60);
     durationS.innerHTML = Math.floor(dur % 60);
 }
 const updateTotalDuration = audi => {
-    let dur = audi.duration - 4;
+    let dur = audi.duration
     durationMT.innerHTML = Math.floor(dur / 60);
     durationST.innerHTML = Math.floor(dur % 60);
 }
 audio.onloadedmetadata = function() {
-    seekSlider.max = audio.duration - 4;
+    seekSlider.max = audio.duration;
     updateTotalDuration(audio);
     var playedPercentage = (audio.currentTime / audio.duration) * 100;
 
@@ -138,7 +128,7 @@ seekSlider.oninput = function() {
     seekSlider.style.background = `linear-gradient(to right, #fff3f3 ${playedPercentage}%, #fff3 ${playedPercentage}%)`;
     audio.ontimeupdate = function() {
 
-        if (audio.duration - 4 <= audio.currentTime) {
+        if (audio.duration <= audio.currentTime) {
             nextSong();
         } else {
             updateD();
@@ -151,12 +141,11 @@ seekSlider.onchange = () => {
     audio.currentTime = seekSlider.value;
     setof();
     played();
-
 }
 function setof() {
     audio.ontimeupdate = function() {
         seekSlider.value = audio.currentTime;
-        if (audio.duration - 4 <= audio.currentTime) {
+        if (audio.duration <= audio.currentTime) {
             nextSong();
         } else {
             updateDuration(audio);
@@ -165,19 +154,62 @@ function setof() {
 
     }
 }
-var isPlaying = false;
 function playM(ok) {
-    played();
+    played()
     setof()
-    if (isPlaying) {
-        audio.pause();
-        isPlaying = false;
-        ok.classList.add("fa-play");
-        ok.classList.remove("fa-pause");
+    if (ok.classList.contains("fa-pause")) {
+        audio.pause()
+        ok.classList.add("fa-play")
+        ok.classList.remove("fa-pause")
     } else {
-        audio.play();
-        isPlaying = true;
-        ok.classList.remove("fa-play");
-        ok.classList.add("fa-pause");
+        audio.play()
+        ok.classList.remove("fa-play")
+        ok.classList.add("fa-pause")
     }
 }
+
+function setMediaSessionMetadata(audio) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+        title: audio.title,
+        artist: "Artist",
+        album: "Zotify",
+        artwork: [
+          { src: audio.src, sizes: "512x512", type: "image/jpeg" }
+        ]
+      })
+  }
+
+  navigator.mediaSession.setActionHandler('play', (e) => {
+    audio.play()
+    playM(document.querySelector('.ctlBtn > .playbtn'))
+    console.log('play')
+  })
+
+  navigator.mediaSession.setActionHandler('pause', function() {
+    audio.pause()
+    playM(document.querySelector('.ctlBtn > .playbtn'))
+    console.log('pause')
+  })
+  
+  navigator.mediaSession.setActionHandler('previoustrack', previousSong)
+
+  navigator.mediaSession.setActionHandler('nexttrack', nextSong)
+
+  // key controllers
+    document.addEventListener('keydown', function(e) {
+        if (e.code === 'Space') {
+        playM(document.querySelector('.ctlBtn > .playbtn'))
+        } else if (e.code === 'ArrowRight') {
+        if (audio.currentTime + 5 >= audio.duration) {
+            nextSong()
+        } else {
+            seekSlider.value = audio.currentTime + 5
+            seekSlider.onchange()
+        }
+        } else if (e.code === 'ArrowLeft') {
+        seekSlider.value = audio.currentTime - 5
+        seekSlider.onchange()
+        } else {
+            console.log(e.code)
+        }
+    })
